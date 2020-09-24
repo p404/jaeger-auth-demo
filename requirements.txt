@@ -1,0 +1,6 @@
+opentracing
+Flask_SQLAlchemy
+Flask
+Flask_OpenTracing
+jaeger_client
+SQLAlchemy
