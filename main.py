@@ -2,6 +2,7 @@
 # pylint: disable=C0103
 
 import os
+import time 
 import logging
 import opentracing
 from jaeger_client import Config
@@ -58,6 +59,7 @@ def login():
         sp = opentracing_tracer.start_span('query', child_of=span)
         session = Session()
         user = session.query(Users).filter_by(email = email).first()
+        time.sleep(30)
         sp.finish()
         if user is None:
             return Response(status=404, mimetype='application/json')
