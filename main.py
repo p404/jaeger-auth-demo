@@ -11,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, Response, request 
 from flask_opentracing import FlaskTracer
 
+SLEEP_TIMER = os.environ['SLEEP_TIMER']
 DATABASE_URI = os.environ['DATABASE_URI']
 JAEGER_HOST = os.environ['JAEGER_REPORTING_HOST']
 JAEGER_PORT = os.environ['JAEGER_REPORTING_PORT']
@@ -60,7 +61,7 @@ def login():
         sp = opentracing_tracer.start_span('query', child_of=span)
         session = Session()
         user = session.query(Users).filter_by(email = email).first()
-        time.sleep(30)
+        time.sleep(SLEEP_TIMER)
         sp.finish()
         if user is None:
             return Response(status=404, mimetype='application/json')
