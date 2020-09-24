@@ -1,5 +1,3 @@
--- Create database
-CREATE DATABASE auth;
 \c auth;
 
 -- Create table of users

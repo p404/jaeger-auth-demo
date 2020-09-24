@@ -11,13 +11,14 @@ from flask_sqlalchemy import SQLAlchemy
 from flask import Flask, Response, request 
 from flask_opentracing import FlaskTracer
 
+DATABASE_URI = os.environ['DATABASE_URI']
 JAEGER_HOST = os.environ['JAEGER_REPORTING_HOST']
 JAEGER_PORT = os.environ['JAEGER_REPORTING_PORT']
 JAEGER_SVC_NAME = os.environ['JAEGER_SVC_NAME']
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:s3cureauth@db_auth:5432/auth'
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 db = SQLAlchemy(app)
 engine = db.engine
 Session = sessionmaker(bind=engine)
